@@ -13,8 +13,15 @@ https://docs.djangoproject.com/en/4.2/ref/settings/
 import os
 from pathlib import Path
 
-# Build paths inside the project like this: BASE_DIR / 'subdir'.
+
 BASE_DIR = Path(__file__).resolve().parent.parent
+
+
+STATIC_URL = 'static/'
+STATICFILES_DIRS = [os.path.join(BASE_DIR, 'apps/static')]
+
+
+
 
 
 # Quick-start development settings - unsuitable for production
@@ -22,13 +29,14 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 
 # SECURITY WARNING: keep the secret key used in production secret!
 SECRET_KEY = 'django-insecure-r1myn!s)v^&1(4xf#6+cxqik(o@v3jx)ueoku***+$w)-ugw-8'
+
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ['*']
 
 
-# Application definition
+
 
 INSTALLED_APPS = [
     'django.contrib.admin',
@@ -52,7 +60,7 @@ MIDDLEWARE = [
 
 ROOT_URLCONF = 'bookwebsite.urls'
 
-TEMPLATE_DIR = os.path.join(BASE_DIR,"apps" + os.sep + "templates")
+TEMPLATE_DIR = os.path.join(BASE_DIR, "apps" + os.sep + "templates")
 
 TEMPLATES = [
     {
@@ -115,17 +123,9 @@ USE_I18N = True
 USE_TZ = True
 
 
-# Static files (CSS, JavaScript, Images)
-# https://docs.djangoproject.com/en/4.2/howto/static-files/
 
-
-STATIC_URL = '/static/'
-STATICFILES_DIRS = [BASE_DIR / "static"]
 
 # Default primary key field type
 # https://docs.djangoproject.com/en/4.2/ref/settings/#default-auto-field
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
-
-
-ALLOWED_HOSTS = ['*']
