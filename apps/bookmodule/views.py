@@ -12,7 +12,7 @@ def viewbook(request, bookId):
 def aboutus(request):
     return render(request, "bookmodule/aboutus.html")
 
-# New views for Lab 5
+
 def links_page(request):
     return render(request, "bookmodule/html5/links.html")
 
@@ -24,3 +24,6 @@ def listing_page(request):
 
 def tables_page(request):
     return render(request, "bookmodule/html5/tables.html")
+
+def search_page(request):
+    return render(request, 'bookmodule/search.html')
