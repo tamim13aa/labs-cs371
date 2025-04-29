@@ -4,6 +4,10 @@ from django.db.models import Q
 from .models import Student, Department
 from django.db.models import Count
 from django.db.models import Max
+from django.shortcuts import render, redirect, get_object_or_404
+
+
+
 
 
 
@@ -106,5 +110,46 @@ def lab9_task2(request):
 def lab9_task3(request):
     students = Student.objects.prefetch_related('courses').all()
     return render(request, 'bookmodule/lab9_task3.html', {'students': students})
+
+
+
+def list_books(request):
+    books = Book.objects.all()
+    return render(request, 'bookmodule/lab10/list_books.html', {'books': books})
+
+def add_book(request):
+    if request.method == "POST":
+        Book.objects.create(
+            title=request.POST.get("title"),
+            author=request.POST.get("author"),
+            price=request.POST.get("price"),
+            edition=request.POST.get("edition")
+        )
+        return redirect('books.lab10.listbooks')
+    return render(request, 'bookmodule/lab10/add_book.html')
+
+
+def edit_book(request, id):
+    book = get_object_or_404(Book, id=id)
+    if request.method == "POST":
+        book.title = request.POST.get("title")
+        book.author = request.POST.get("author")
+        book.price = request.POST.get("price")
+        book.edition = request.POST.get("edition")
+        book.save()
+        return redirect('books.lab10.listbooks')
+    return render(request, 'bookmodule/lab10/edit_book.html', {'book': book})
+
+
+def delete_book(request, id):
+    book = get_object_or_404(Book, id=id)
+    book.delete()
+    return redirect('books.lab10.listbooks')
+
+
+
+
+
+
 
 

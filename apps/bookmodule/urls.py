@@ -31,11 +31,14 @@ urlpatterns = [
     path('lab9/task2/', views.lab9_task2, name="books.lab9.task2"),
     path('lab9/task3/', views.lab9_task3, name="books.lab9.task3"),
 
-
-
-
-
-
+    
+    path('lab9_part1/listbooks/', views.list_books, name="books.lab10.listbooks"),
+    path('lab9_part1/addbook/', views.add_book, name="books.lab10.addbook"),
+    path('lab9_part1/editbook/<int:id>/', views.edit_book, name="books.lab10.editbook"),
+    path('lab9_part1/deletebook/<int:id>/', views.delete_book, name="books.lab10.deletebook"),
 ]
+
+
+
 
 
