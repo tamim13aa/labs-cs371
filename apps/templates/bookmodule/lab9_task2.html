@@ -1,0 +1,20 @@
+{% extends "layouts/base.html" %}
+{% block title %} Oldest Student Per Department {% endblock title %}
+
+{% block content %}
+<h2>Oldest Student Per Department</h2>
+<table border="1">
+    <tr>
+        <th>Department</th>
+        <th>Student</th>
+        <th>Age</th>
+    </tr>
+    {% for row in result %}
+    <tr>
+        <td>{{ row.department }}</td>
+        <td>{{ row.student.name }}</td>
+        <td>{{ row.student.age }}</td>
+    </tr>
+    {% endfor %}
+</table>
+{% endblock content %}

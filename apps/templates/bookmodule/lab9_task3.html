@@ -1,0 +1,17 @@
+{% extends "layouts/base.html" %}
+{% block title %} Courses per Student {% endblock title %}
+
+{% block content %}
+<h2>Courses for Each Student</h2>
+{% for student in students %}
+    <h3>{{ student.name }} (Dept: {{ student.department.name }})</h3>
+    <ul>
+        {% for course in student.courses.all %}
+            <li>{{ course.title }} ({{ course.code }})</li>
+        {% empty %}
+            <li>No courses enrolled.</li>
+        {% endfor %}
+    </ul>
+    <hr>
+{% endfor %}
+{% endblock content %}

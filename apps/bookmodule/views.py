@@ -1,6 +1,9 @@
 from django.shortcuts import render
 from .models import Book
 from django.db.models import Q
+from .models import Student, Department
+from django.db.models import Count
+from django.db.models import Max
 
 
 
@@ -79,5 +82,29 @@ def lab8_task7(request):
 
 
 
+def lab9_task1(request):
+    results = Student.objects.values('department__name').annotate(count=Count('id')).order_by('-count')
+    return render(request, 'bookmodule/lab9_task1.html', {'results': results})
+
+
+
+
+def lab9_task2(request):
+    max_ages = Student.objects.values('department__name').annotate(max_age=Max('age'))
+
+    result = []
+    for item in max_ages:
+        oldest = Student.objects.filter(
+            department__name=item['department__name'], 
+            age=item['max_age']
+        ).first()
+        result.append({'department': item['department__name'], 'student': oldest})
+
+    return render(request, 'bookmodule/lab9_task2.html', {'result': result})
+
+
+def lab9_task3(request):
+    students = Student.objects.prefetch_related('courses').all()
+    return render(request, 'bookmodule/lab9_task3.html', {'students': students})
 
 
